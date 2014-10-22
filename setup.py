@@ -1,24 +1,19 @@
 from setuptools import setup, find_packages
 
 
-def desc():
-    with open("README.md") as f:
-        return f.read()
-
-def reqs():
-    with open('requirements.txt') as f:
-        return f.read().splitlines()
-
 setup(
-    name='frasco-assets',
+    name='frasco-countries',
     version='0.1',
-    url='http://github.com/frascoweb/frasco-assets',
+    url='http://github.com/frascoweb/frasco-countries',
     license='MIT',
     author='Maxime Bouroumeau-Fuseau',
     author_email='maxime.bouroumeau@gmail.com',
     description="pycountry integration for Frasco",
-    long_description=desc(),
     packages=find_packages(),
+    zip_safe=False,
     platforms='any',
-    install_requires=reqs() + ['frasco']
+    install_requires=[
+        # 'frasco',
+        'pycountry>=1.8'
+    ]
 )
