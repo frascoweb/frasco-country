@@ -6,15 +6,15 @@ from . import current_country, country_currency
 
 class CountryField(SelectField):
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault('choices', [(c.alpha2, c.name) for c in countries])
+        kwargs.setdefault('choices', [(c.alpha_2, c.name) for c in countries])
         if current_country:
-            kwargs.setdefault("default", current_country.alpha2)
+            kwargs.setdefault("default", current_country.alpha_2)
         super(CountryField, self).__init__(*args, **kwargs)
 
 
 class LanguageField(SelectField):
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault('choices', [(c.alpha2, c.name) for c in languages if hasattr(c, "alpha2")])
+        kwargs.setdefault('choices', [(c.alpha_2, c.name) for c in languages if hasattr(c, "alpha_2")])
         kwargs.setdefault("default", "en")
         super(LanguageField, self).__init__(*args, **kwargs)
 

@@ -23,7 +23,7 @@ def country_name(alpha2):
     """Returns the name of the country identified by the alpha2 code
     """
     try:
-        return countries.get(alpha2=alpha2).name
+        return countries.get(alpha_2=alpha2).name
     except:
         return None
 
@@ -37,7 +37,7 @@ def country_currency(alpha2_or_country_obj):
     """Returns the currency code of the specified country
     """
     if isinstance(alpha2_or_country_obj, (str, unicode)):
-        country = countries.get(alpha2=alpha2_or_country_obj)
+        country = countries.get(alpha_2=alpha2_or_country_obj)
     else:
         country = alpha2_or_country_obj
     if country.numeric in eurozone_countries:
@@ -68,7 +68,7 @@ class CountriesFeature(Feature):
         else:
             alpha2 = session["current_country_code"]
         if alpha2:
-            flask._request_ctx_stack.top.current_country = countries.get(alpha2=alpha2)
+            flask._request_ctx_stack.top.current_country = countries.get(alpha_2=alpha2)
 
     @action("set_current_country", default_option="alpha2")
     def set_current(self, country=None, is_global=True, **kwargs):
@@ -82,7 +82,7 @@ class CountriesFeature(Feature):
 
         flask._request_ctx_stack.top.current_country = country
         if is_global:
-            session["current_country_code"] = country.alpha2
+            session["current_country_code"] = country.alpha_2
         return country
 
     @action("get_country", default_option="alpha2", as_="country")

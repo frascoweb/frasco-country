@@ -12,4 +12,4 @@ class ExistingCountries(BaseExistingCountries):
     generated_fields = dict(slug=lambda x: slugify(x.name))
 
 
-countries = ExistingCountries(os.path.join(DATABASE_DIR, 'iso3166.xml'))
+countries = ExistingCountries(os.path.join(DATABASE_DIR, 'iso3166-1.json'))
