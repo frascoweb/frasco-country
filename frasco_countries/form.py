@@ -6,7 +6,9 @@ from . import current_country, country_currency
 
 class CountryField(SelectField):
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault('choices', [(c.alpha_2, c.name) for c in countries])
+        kwargs.setdefault('choices',
+            sorted([(c.alpha_2, c.name) for c in countries],
+                key=lambda v: v[1].lower()))
         if current_country:
             kwargs.setdefault("default", current_country.alpha_2)
         super(CountryField, self).__init__(*args, **kwargs)
@@ -14,14 +16,17 @@ class CountryField(SelectField):
 
 class LanguageField(SelectField):
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault('choices', [(c.alpha_2, c.name) for c in languages if hasattr(c, "alpha_2")])
+        kwargs.setdefault('choices', 
+            sorted([(c.alpha_2, c.name) for c in languages if hasattr(c, "alpha_2")],
+                key=lambda v: v[1].lower()))
         kwargs.setdefault("default", "en")
         super(LanguageField, self).__init__(*args, **kwargs)
 
 
 class CurrencyField(SelectField):
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault('choices', [(c.alpha_3, c.name) for c in currencies])
+        kwargs.setdefault('choices', sorted([(c.alpha_3, c.name) for c in currencies],
+            key=lambda v: v[1].lower()))
         try:
             if current_country:
                 kwargs.setdefault('default', country_currency(current_country))
