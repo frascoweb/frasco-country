@@ -25,7 +25,7 @@ class LanguageField(SelectField):
 
 class CurrencyField(SelectField):
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault('choices', sorted([(c.alpha_3, c.name) for c in currencies],
+        kwargs.setdefault('choices', sorted([(c.alpha_3, "%s - %s" % (c.alpha_3, c.name)) for c in currencies],
             key=lambda v: v[1].lower()))
         try:
             if current_country:
