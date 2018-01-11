@@ -21,7 +21,7 @@ class LanguageField(SelectField):
 
 class CurrencyField(SelectField):
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault('choices', [(c.letter, c.name) for c in currencies])
+        kwargs.setdefault('choices', [(c.alpha_3, c.name) for c in currencies])
         try:
             if current_country:
                 kwargs.setdefault('default', country_currency(current_country))

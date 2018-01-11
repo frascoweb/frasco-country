@@ -96,7 +96,7 @@ class CountriesFeature(Feature):
     def geolocate(self):
         return countries.get(alpha2=current_context.data.geo_country_code)
 
-    @action(default_option="letter", as_="currency")
+    @action(default_option="alpha_3", as_="currency")
     def get_currency(self, **kwargs):
         try:
             return currencies.get(**kwargs)
